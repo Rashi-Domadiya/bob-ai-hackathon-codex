@@ -9,51 +9,70 @@
 # =============================================================================
 
 team:
-  name: ""                             # REQUIRED — e.g., "Orion Squad"
-  track: ""                            # REQUIRED — one of: AI | DevOps | Sustainability | Open
+  name: "codex"                             # REQUIRED — e.g., "Orion Squad"
+  track: "AI"                            # REQUIRED — one of: AI | DevOps | Sustainability | Open
   lead:
-    name: ""                           # REQUIRED — e.g., "Alice Chen"
-    email: ""                          # REQUIRED — e.g., "alice.chen@ibm.com"
+    name: "Rutvi Ranparia"                           # REQUIRED — e.g., "Alice Chen"
+    email: "25ce100@charusat.edu.in"                          # REQUIRED — e.g., "alice.chen@ibm.com"
   members:
-    - name: ""                         # REQUIRED — Team member 1
-      email: ""
-    - name: ""                         # Add more members by copying the two lines above
-      email: ""
-    - name: ""
-      email: ""
+    - name: "Rashi Domadiya"                         # REQUIRED — Team member 1
+      email: "25ce026@charusat.edu.in"
+    - name: "Yati Soliya"                         # Add more members by copying the two lines above
+      email: "25ce118@charusat.edu.in"
+    - name: "Shivangi Tank"
+      email: "25ce121@charusat.edu.in"
 
 submission:
-  title: ""                            # REQUIRED — Project display name, e.g., "SmartOps Dashboard"
+  title: "GridGuard — Power Outage Prediction & Grid Equipment Failure Advisor"                            # REQUIRED — Project display name, e.g., "SmartOps Dashboard"
 
   problem_statement: >                 # REQUIRED — 1-3 sentences. What problem? Who has it?
-    Replace this text with a concise description of the real-world problem
-    your project addresses and who experiences it.
+    Utilities still schedule transformer and substation maintenance by calendar
+    date instead of actual asset condition, even though sensors already
+    measure temperature, vibration, partial discharge, and oil quality that
+    show failure signatures weeks in advance. Weather forecasts are tracked
+    separately from equipment health, so crews are rarely pre-positioned
+    before a storm hits an already-weak part of the grid. A single
+    transformer failure during peak demand can black out a region for hours
+    and cost utilities upward of $1M per hour.
 
   solution_summary: >                  # REQUIRED — 1-3 sentences. What did you build?
-    Replace this text with a clear description of your solution
-    and how it addresses the problem above.
+    GridGuard combines live asset health sensor readings, historical incident
+    records, and short-term weather forecasts into a single risk model. It
+    scores every monitored asset for outage probability, ranks assets by
+    grid impact (customers served, criticality, redundancy), and produces a
+    prioritised maintenance and crew pre-positioning plan that a grid
+    operations supervisor can act on the same day — instead of discovering
+    the failure after the lights go out.
 
   key_features:                        # REQUIRED — List 3 to 5 specific features you implemented
-    - ""                               # e.g., "Real-time pipeline anomaly detection using watsonx.ai"
-    - ""
-    - ""
-    - ""                               # optional 4th
-    - ""                               # optional 5th
+     - "Ingests transformer/substation sensor data (temperature, vibration, partial discharge, oil quality) alongside NOAA-style weather forecasts"
+    - "Anomaly-detection risk score per asset (Isolation Forest over sensor readings) blended with a weather-exposure multiplier"
+    - "Grid-impact ranking that weighs customers served, asset criticality, and substation redundancy"
+    - "Auto-generated prioritised maintenance + crew pre-positioning plan (Markdown/PDF report) for the next 72 hours"
+    - "Natural-language explanation of *why* each asset is flagged, generated through IBM Bob / watsonx.ai for operator-readable summaries"                             # optional 5th
 
   tech_stack:
-    languages: []                      # REQUIRED — e.g., ["Python", "TypeScript"]
-    frameworks: []                     # e.g., ["FastAPI", "React"]
-    ibm_technologies: []               # e.g., ["watsonx.ai", "IBM Bob", "IBM Cloud Functions"]
-    databases: []                      # e.g., ["PostgreSQL", "Redis"]
-    other: []                          # e.g., ["Docker", "GitHub Actions", "Slack API"]
+    languages: [Python 3.11, pandas, scikit-learn (Isolation Forest for anomaly detection)]                      # REQUIRED — e.g., ["Python", "TypeScript"]
+    frameworks: [IBM Bob (architecture planning, code review, natural-language summary generation)]                     # e.g., ["FastAPI", "React"]
+    ibm_technologies: [ watsonx.ai Granite (explanation/report generation layer)]               # e.g., ["watsonx.ai", "IBM Bob", "IBM Cloud Functions"]
+    databases: [Sample data in CSV to keep the demo runnable with no external accounts]                      # e.g., ["PostgreSQL", "Redis"]
+                           
 
   what_we_are_most_proud_of: >         # Optional but recommended — guides judges to your best work
-    Replace with what aspect of the submission you consider strongest
-    and want judges to pay special attention to.
+   The risk score isn't a single black-box number — every flagged asset gets a
+plain-English "why" so a supervisor doesn't have to trust a number blindly.
+That explainability layer is what actually makes this usable during a live
+storm response, not just in a demo.
 
   known_limitations: >                 # Optional but recommended — be honest about gaps
-    Replace with any known limitations, incomplete features,
-    or shortcuts taken due to time constraints.
+    - Sample data is synthetic (shaped like real SCADA/HUMS-style feeds) — it is
+  not connected to a live utility's sensor network for this hackathon build.
+- The watsonx.ai explanation step currently runs against a mocked response in
+  the demo build so it works without live credentials; the integration point
+  is isolated in `src/main.py` (`generate_explanation()`), ready to swap in a
+  real API key.
+- Crew pre-positioning currently assumes a single depot per region; multi-depot
+  routing is on our roadmap, not in this build.
 
 # =============================================================================
 # ARTIFACT LOCATIONS
