@@ -22,7 +22,13 @@ IBM BoB AI Innovation Hackathon 2026 · Problem Statement **U1** (Utilities — 
 
 > In 2–3 sentences: What problem does your project solve? Who experiences this problem?
 
-[Describe the real-world problem your project addresses. Be specific about who the user is and what pain point they face.]
+[Most utilities maintain transformers and substations on a fixed calendar
+schedule, not on actual equipment condition. Sensors already record
+temperature, vibration, partial discharge, and oil quality — data that shows
+failure signatures weeks before a breakdown — but nobody is combining that
+with weather forecasts to act early. A single unplanned outage can cost a
+utility $1M+ per hour and leave a region without power for hours.
+Full detail: [`docs/problem-statement.md`](docs/problem-statement.md).]
 
 ---
 
@@ -30,17 +36,22 @@ IBM BoB AI Innovation Hackathon 2026 · Problem Statement **U1** (Utilities — 
 
 > In 2–3 sentences: What did you build? How does it solve the problem above?
 
-[Describe your solution clearly. Explain the core mechanism — what makes it work.]
+[ridGuard is a risk-scoring and planning assistant that:
+
+1. Reads sensor health data for every monitored transformer/substation
+2. Cross-references it with the short-term weather forecast for that asset's region
+3. Scores each asset's outage probability and ranks assets by how much of the grid they'd take down if they failed
+4. Produces a prioritised, human-readable maintenance and crew pre-positioning plan for the next 72 hours]
 
 ---
 
 ## ✨ Key Features
 
-- **Feature 1:** [Brief description — e.g., "Real-time anomaly detection using watsonx.ai"]
-- **Feature 2:** [Brief description]
-- **Feature 3:** [Brief description]
-- **Feature 4:** [Optional]
-- **Feature 5:** [Optional]
+- **Feature 1:** [Ingests real-shaped sensor + weather + incident-history data]
+- **Feature 2:** [Isolation-Forest anomaly scoring over sensor readings, blended with a weather-exposure multiplier]
+- **Feature 3:** [ Grid-impact ranking (customers served × criticality × redundancy)]
+- **Feature 4:** [uto-generated, operator-readable maintenance + crew pre-positioning report.]
+- **Feature 5:** [IBM Bob / watsonx.ai used to turn the raw ranked table into plain-English explanations a non-technical operator can act on immediately.]
 
 ---
 
