@@ -1,4 +1,7 @@
-# 🚀 [Your Project Title Here]
+# 🚀 [GridGuard — Power Outage Prediction & Grid Equipment Failure Advisor
+
+IBM BoB AI Innovation Hackathon 2026 · Problem Statement **U1** (Utilities — Power, Energy, Transmission & Distribution)
+]
 
 > ⚠️ **Replace everything in `[ ]` brackets with your actual content before submission.**
 
@@ -8,10 +11,10 @@
 
 | Field | Value |
 |---|---|
-| **Team Name** | [Your Team Name] |
-| **Track** | [AI / DevOps / Sustainability / Open] |
-| **Team Lead** | [Name] — [email@ibm.com] |
-| **Members** | [Name 1], [Name 2], [Name 3] |
+| **Team Name** | [codex] |
+| **Track** | [AI] |
+| **Team Lead** | [Rutvi Ranparia] — [25ce100@charusat.edu.in] |
+| **Members** | [Yati Soliya], [Rashi Domadiya], [Shivangi Tank] |
 
 ---
 
@@ -45,13 +48,10 @@
 
 | Category | Technologies |
 |---|---|
-| **Languages** | [e.g., Python, TypeScript] |
-| **Frameworks** | [e.g., FastAPI, React] |
-| **IBM Technologies** | [e.g., watsonx.ai, IBM Bob, IBM Cloud] |
-| **Databases** | [e.g., PostgreSQL, Redis] |
-| **Other** | [e.g., Docker, GitHub Actions] |
-
----
+| **Languages** | [Python 3.11, pandas, scikit-learn (Isolation Forest for anomaly detection)] |
+| **Frameworks** | [IBM Bob (architecture planning, code review, natural-language summary generation)] |
+| **IBM Technologies** | [watsonx.ai Granite (explanation/report generation layer)] |
+| **Databases** | [Sample data in CSV to keep the demo runnable with no external accounts] |
 
 ## 📁 Repository Structure
 
@@ -76,20 +76,15 @@
 > **Copy these exact steps from your [`docs/setup-guide.md`](docs/setup-guide.md)**
 
 ```bash
-# 1. Clone the repo
-git clone https://github.com/[your-repo].git
-cd [your-repo]
-
-# 2. Install dependencies
-[your install command here]
-
-# 3. Configure environment
-cp .env.example .env
-# Edit .env with your values
-
-# 4. Run the project
-[your run command here]
+```bash
+cd src
+pip install -r requirements.txt
+python main.py
 ```
+
+This reads the sample data in `src/sample_data/`, prints a ranked risk table,
+and writes `outage_risk_report.md` — the same report a grid ops supervisor
+would receive.
 
 ---
 
@@ -108,14 +103,22 @@ cp .env.example .env
 
 > Be honest — judges appreciate transparency over overclaiming.
 
-- [Limitation 1: e.g., "Authentication is mocked — not production-ready"]
-- [Limitation 2: e.g., "Only tested on Chrome"]
-- [Limitation 3: e.g., "Feature X is scaffolded but not fully implemented"]
+- [Limitation 1: Sample data is synthetic (shaped like real SCADA/HUMS-style feeds) — it is
+  not connected to a live utility's sensor network for this hackathon build."]
+- [Limitation 2: The watsonx.ai explanation step currently runs against a mocked response in
+  the demo build so it works without live credentials; the integration point
+  is isolated in `src/main.py` (`generate_explanation()`), ready to swap in a
+  real API key."]
+- [Limitation 3: Crew pre-positioning currently assumes a single depot per region; multi-depot
+  routing is on our roadmap, not in this build."]
 
 ---
 
 ## 🏅 What We're Most Proud Of
 
-[Tell the judges what part of your submission is strongest and worth paying close attention to.]
+[The risk score isn't a single black-box number — every flagged asset gets a
+plain-English "why" so a supervisor doesn't have to trust a number blindly.
+That explainability layer is what actually makes this usable during a live
+storm response, not just in a demo.]
 
 ---
