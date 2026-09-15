@@ -103,7 +103,7 @@ would receive.
 
 | Artifact | Link |
 |---|---|
-| 📹 Demo Video | [See demo/demo-video-link.txt](demo/demo-video-link.txt) |
+| 📹 Demo Video | [See demo/demo-video-link.txt](https://drive.google.com/file/d/1dRqrgxuTAFRQnnbzmApmtwDavZLPD8kD/view?usp=drive_link) |
 | 🌐 Live Demo | [See demo/live-demo-url.txt](demo/live-demo-url.txt) |
 | 🖼️ Screenshots | [See demo/screenshots/](demo/screenshots/) |
 | 📊 Presentation | [See presentation/slides.pdf](presentation/) |
